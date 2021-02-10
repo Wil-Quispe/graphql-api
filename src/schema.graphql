@@ -1,0 +1,108 @@
+type Query {
+  user(_id: ID): [User!]!
+  author(_id: ID): [Authors!]!
+  book(_id: ID): [Books!]!
+}
+
+type Mutation {
+  createUser(data: inputCreateUser): User!
+  updateUser(data: inputUpdateUser): User!
+  deleteUser(_id: ID!): User!
+
+  createAuthor(data: inputCreateAuthor): Authors!
+  updateAuthor(data: inputUpdateAuthor): Authors!
+  deleteAuthor(_id: ID!): Authors!
+
+  createBook(data: inputCreateBook): Books!
+  updateBook(data: inputUpdateBook): Books!
+  deleteBook(_id: ID!): Books!
+}
+
+type Subscription {
+  author: AuthorSubscriptionPayload!
+  book(_id: ID!): BookSubscriptionPayload!
+}
+
+enum MutationType {
+  created
+  updated
+  deleted
+}
+
+type BookSubscriptionPayload {
+  mutation: MutationType!
+  data: Books!
+}
+type AuthorSubscriptionPayload {
+  mutation: MutationType!
+  data: Authors!
+}
+
+input inputCreateUser {
+  name: String!
+  nickName: String!
+  age: Int!
+  email: String!
+  password: String!
+}
+input inputUpdateUser {
+  _id: ID!
+  name: String
+  nickName: String
+  age: Int
+  email: String
+  password: String
+}
+type User {
+  _id: ID!
+  name: String!
+  nickName: String!
+  age: Int!
+  email: String!
+}
+
+input inputCreateAuthor {
+  name: String!
+  country: String!
+  register_by: ID!
+}
+input inputUpdateAuthor {
+  _id: ID!
+  name: String
+  country: String
+  register_by: ID
+}
+type Authors {
+  _id: ID!
+  name: String!
+  country: String!
+  register_by: User!
+  books: [Books]
+}
+
+input inputCreateBook {
+  title: String!
+  description: String!
+  quantity: Int!
+  price: Int!
+  writted_by: ID!
+  register_by: ID!
+}
+input inputUpdateBook {
+  _id: ID!
+  title: String
+  description: String
+  quantity: Int
+  price: Int
+  writted_by: ID
+  register_by: ID
+}
+type Books {
+  _id: ID!
+  title: String!
+  description: String!
+  quantity: Int!
+  price: Int!
+  writted_by: Authors!
+  register_by: User!
+}
