@@ -1,12 +1,13 @@
 type Query {
   user(_id: ID): [User!]!
-  author(_id: ID): [Authors!]!
+  author(_id: ID, first: Int, skip: Int): [Authors!]!
   book(_id: ID): [Books!]!
 }
 
 type Mutation {
-  createUser(data: inputCreateUser): User!
-  updateUser(data: inputUpdateUser): User!
+  signUp(data: signUpInput!): AuthPayload!
+  login(data: loginInput!): AuthPayload!
+  updateUser(data: inputUpdateUser!): User!
   deleteUser(_id: ID!): User!
 
   createAuthor(data: inputCreateAuthor): Authors!
@@ -38,13 +39,24 @@ type AuthorSubscriptionPayload {
   data: Authors!
 }
 
-input inputCreateUser {
+type AuthPayload {
+  user: User!
+  token: String!
+}
+
+input signUpInput {
   name: String!
   nickName: String!
   age: Int!
   email: String!
   password: String!
 }
+
+input loginInput {
+  email: String!
+  password: String!
+}
+
 input inputUpdateUser {
   _id: ID!
   name: String
