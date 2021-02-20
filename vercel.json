@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/main.js",
+      "use": "@velcel/node",
+      "config": {
+        "includeFiles": ["dist/schema.graphql"]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/main.js"
+    }
+  ],
+  "env": {
+    "PORTS": "@ports",
+    "DB": "@db"
+  }
+}
