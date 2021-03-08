@@ -11,7 +11,7 @@ const Mutation = {
     const { email, ...rest } = data
     const emailTaken = await User.findOne({ email })
     if (emailTaken) throw new Error('Email is taken')
-    const newUser = new User({ email, ...rest, password })
+    const newUser = new User({ email, ...rest, password })  
     return {
       user: await newUser.save(),
       token: generateToken(newUser._id),
