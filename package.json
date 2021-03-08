@@ -2,9 +2,9 @@
   "name": "babel",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "engines": {
-    "node": "14.15.5"
+    "node": "14.15.4"
   },
   "scripts": {
     "clean": "rimraf dist",
