@@ -11,7 +11,7 @@
     "transpile": "babel ./src --out-dir dist --copy-files",
     "build": "npm-run-all clean transpile",
     "server": "node ./dist/main.js",
-    "prod": "cross-env NODE_ENV=production npm-run-all build server",
+    "prod": "NODE_ENV=production npm-run-all build server",
     "dev": "cross-env NODE_ENV=development npm-run-all build server",
     "watch:dev": "nodemon",
     "start": "npm run prod"
